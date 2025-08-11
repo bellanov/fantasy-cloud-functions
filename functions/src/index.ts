@@ -9,6 +9,8 @@
 
 import {setGlobalOptions} from "firebase-functions";
 import * as Account from "./account";
+import * as Events from "./events";
+import * as EventOdds from "./eventOdds";
 import * as Sports from "./sports";
 
 // Start writing functions
@@ -28,4 +30,6 @@ setGlobalOptions({maxInstances: 10});
 
 // Export Functions
 export const getAccountQuota = Account.getAccountQuota;
+export const getEvents = Events.getEvents;
+export const getEventOdds = EventOdds.getEventOdds;
 export const getSports = Sports.getSports;
