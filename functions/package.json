@@ -1,6 +1,7 @@
 {
   "name": "functions",
   "scripts": {
+    "format": "npm run lint -- --fix",
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
     "build:watch": "tsc --watch",
