@@ -8,7 +8,13 @@
  */
 
 import {onRequest} from "firebase-functions/https";
+import {logger} from "firebase-functions/v1";
 
 export const getSports = onRequest((request, response) => {
-  response.send("Hello from Sports!");
+  try {
+    response.send("Hello from Sports!!!");
+  } catch (error) {
+    logger.error("Error getting sports:", error);
+    response.status(500).json({error: "Internal server error"});
+  }
 });
