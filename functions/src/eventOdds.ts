@@ -9,12 +9,29 @@
 
 import {onRequest} from "firebase-functions/https";
 import {logger} from "firebase-functions/v1";
+import {db} from "./firebase";
 
-export const getEventOdds = onRequest((request, response) => {
+
+// Define the Cloud Function
+export const getEventOdds = onRequest(async (request, response) => {
   try {
-    response.send("Hello from Event Odds!!!");
+    logger.info("Retrieving Event Odds Data");
+
+    // Build and execute the query
+    db.collection("sports").get()
+      .then((snapshot) => {
+        if (!snapshot.empty) {
+          const eventOddsData = snapshot.docs.map((doc) => doc.data());
+          response.json({"eventOddsData": eventOddsData});
+        } else {
+          logger.warn("No such document!");
+        }
+      })
+      .catch((error) => {
+        logger.error("Error getting document:", error);
+      });
   } catch (error) {
-    logger.error("Error getting event odds:", error);
-    response.status(500).json({error: "Internal server error"});
+    logger.error("Error creating user:", error);
+    response.status(500).send("Internal Server Error");
   }
 });
