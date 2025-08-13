@@ -22,7 +22,7 @@ export const getEventOdds = onRequest(async (request, response) => {
       .then((snapshot) => {
         if (!snapshot.empty) {
           const eventOddsData = snapshot.docs.map((doc) => doc.data());
-          response.json({"eventOddsData": eventOddsData});
+          response.json({"data": eventOddsData});
         } else {
           logger.warn("No such document!");
         }

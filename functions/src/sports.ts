@@ -22,7 +22,7 @@ export const getSports = onRequest(async (request, response) => {
       .then((snapshot) => {
         if (!snapshot.empty) {
           const sportsData = snapshot.docs.map((doc) => doc.data());
-          response.json({"sportsData": sportsData});
+          response.json({"data": sportsData});
         } else {
           logger.warn("No such document!");
         }

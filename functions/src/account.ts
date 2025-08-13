@@ -16,7 +16,7 @@ export const getAccountQuota = onRequest(async (request, response) => {
     db.collection("account").doc("requests").get()
       .then((doc) => {
         if (doc.exists) {
-          response.json({"accountQuota": doc.data()});
+          response.json({"data": doc.data()});
         } else {
           logger.warn("No such document!");
         }
