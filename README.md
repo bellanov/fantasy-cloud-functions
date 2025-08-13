@@ -1,6 +1,6 @@
 # fantasy-cloud-functions
 
-This project defines **Cloud Functions** that query *Firestore* for Odds Data.
+**Cloud Functions** that query *Firestore* for FantasyAce.
 
 ## Usage
 

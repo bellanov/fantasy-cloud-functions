@@ -7,7 +7,7 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-import {setGlobalOptions} from "firebase-functions";
+import { setGlobalOptions } from "firebase-functions";
 import * as Account from "./account";
 import * as Events from "./events";
 import * as EventOdds from "./eventOdds";
@@ -26,7 +26,7 @@ import * as Sports from "./sports";
 // functions should each use functions.runWith({ maxInstances: 10 }) instead.
 // In the v1 API, each function can only serve one request per container, so
 // this will be the maximum concurrent request count.
-setGlobalOptions({maxInstances: 10});
+setGlobalOptions({ maxInstances: 10 });
 
 // Export Functions
 export const getAccountQuota = Account.getAccountQuota;

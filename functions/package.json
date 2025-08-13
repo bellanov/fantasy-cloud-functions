@@ -1,7 +1,7 @@
 {
   "name": "functions",
   "scripts": {
-    "format": "npm run lint -- --fix",
+    "format": "npx prettier . --write",
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
     "build:watch": "tsc --watch",
@@ -26,6 +26,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.25.4",
     "firebase-functions-test": "^3.1.0",
+    "prettier": "^3.6.2",
     "typescript": "^5.7.3"
   },
   "private": true

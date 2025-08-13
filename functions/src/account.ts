@@ -2,10 +2,9 @@
  * Retrieve Account Quota.
  * Query Firestore for account quota information.
  */
-import {onRequest} from "firebase-functions/https";
-import {logger} from "firebase-functions/v1";
-import {db} from "./firebase";
-
+import { onRequest } from "firebase-functions/https";
+import { logger } from "firebase-functions/v1";
+import { db } from "./firebase";
 
 // Define the Cloud Function
 export const getAccountQuota = onRequest(async (request, response) => {
@@ -13,10 +12,12 @@ export const getAccountQuota = onRequest(async (request, response) => {
     logger.info("Retrieving Account Quota");
 
     // Build and execute the query
-    db.collection("account").doc("requests").get()
+    db.collection("account")
+      .doc("requests")
+      .get()
       .then((doc) => {
         if (doc.exists) {
-          response.json({"data": doc.data()});
+          response.json({ data: doc.data() });
         } else {
           logger.warn("No such document!");
         }
