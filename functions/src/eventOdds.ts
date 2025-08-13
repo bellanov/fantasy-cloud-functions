@@ -13,16 +13,16 @@ import {db} from "./firebase";
 
 
 // Define the Cloud Function
-export const getSports = onRequest(async (request, response) => {
+export const getEventOdds = onRequest(async (request, response) => {
   try {
-    logger.info("Retrieving Sports Data");
+    logger.info("Retrieving Event Odds Data");
 
     // Build and execute the query
     db.collection("sports").get()
       .then((snapshot) => {
         if (!snapshot.empty) {
-          const sportsData = snapshot.docs.map((doc) => doc.data());
-          response.json({"data": sportsData});
+          const eventOddsData = snapshot.docs.map((doc) => doc.data());
+          response.json({"data": eventOddsData});
         } else {
           logger.warn("No such document!");
         }
