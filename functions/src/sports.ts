@@ -7,10 +7,9 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-import {onRequest} from "firebase-functions/https";
-import {logger} from "firebase-functions/v1";
-import {db} from "./firebase";
-
+import { onRequest } from "firebase-functions/https";
+import { logger } from "firebase-functions/v1";
+import { db } from "./firebase";
 
 // Define the Cloud Function
 export const getSports = onRequest(async (request, response) => {
@@ -18,11 +17,12 @@ export const getSports = onRequest(async (request, response) => {
     logger.info("Retrieving Sports Data");
 
     // Build and execute the query
-    db.collection("sports").get()
+    db.collection("sports")
+      .get()
       .then((snapshot) => {
         if (!snapshot.empty) {
           const sportsData = snapshot.docs.map((doc) => doc.data());
-          response.json({"data": sportsData});
+          response.json({ data: sportsData });
         } else {
           logger.warn("No such document!");
         }
