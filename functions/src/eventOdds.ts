@@ -7,9 +7,9 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-import { onRequest } from "firebase-functions/https";
-import { logger } from "firebase-functions/v1";
-import { db } from "./firebase";
+import {onRequest} from "firebase-functions/https";
+import {logger} from "firebase-functions/v1";
+import {db} from "./firebase";
 
 // Define the Cloud Function
 export const getEventOdds = onRequest(async (request, response) => {
@@ -22,7 +22,7 @@ export const getEventOdds = onRequest(async (request, response) => {
       .then((snapshot) => {
         if (!snapshot.empty) {
           const eventOddsData = snapshot.docs.map((doc) => doc.data());
-          response.json({ data: eventOddsData });
+          response.json({data: eventOddsData});
         } else {
           logger.warn("No such document!");
         }
