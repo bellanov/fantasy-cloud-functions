@@ -21,7 +21,7 @@ export const getEvents = onRequest(async (request, response) => {
     // Get the next iteration cursor
     let startAfterId = request.query.startAfter as string;
     // Get the sports league to query
-    let sportKey = request.query.sportKey as string || "americanfootball_nfl";
+    const sportKey = request.query.sportKey as string || "americanfootball_nfl";
 
     logger.info(`Limit set to: ${limit}`);
     logger.info(`Start after set to: ${startAfterId}`);
