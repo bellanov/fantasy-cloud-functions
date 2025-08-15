@@ -18,19 +18,19 @@ export const getEvents = onRequest(async (request, response) => {
 
     // Get limit from query params, default to 10
     let limit = parseInt(request.query.limit as string) || 10;
-    // Get current UTC timestamp
-    const nowUtc = new Date().toISOString();
     // Get the next iteration cursor
     let startAfterId = request.query.startAfter as string;
+    // Get the sports league to query
+    const sportKey = request.query.sportKey as string || "americanfootball_nfl";
 
-    logger.info(`Current UTC timestamp: ${nowUtc}`);
     logger.info(`Limit set to: ${limit}`);
     logger.info(`Start after set to: ${startAfterId}`);
+    logger.info(`Sport key set to: ${sportKey}`);
 
     // Check if cursor exists
     if (!startAfterId) {
-      logger.warn("No startAfterId provided, using current UTC time.");
-      startAfterId = nowUtc;
+      logger.warn("No startAfterId provided, using default value.");
+      startAfterId = "2025-12-23T00:00:00Z";
     }
 
     // Check if the limit is within the threshold
@@ -41,6 +41,7 @@ export const getEvents = onRequest(async (request, response) => {
 
     // Build and execute the query
     db.collection("events")
+      .where("sport_key", "==", sportKey)
       .where("commence_time", "<", startAfterId)
       .orderBy("commence_time", "desc")
       .limit(limit)
@@ -64,6 +65,9 @@ export const getEvents = onRequest(async (request, response) => {
           });
         } else {
           logger.warn("No such documents!");
+          response
+            .status(400)
+            .send("No events found");
         }
       })
       .catch((error) => {
