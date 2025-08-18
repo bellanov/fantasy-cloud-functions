@@ -21,7 +21,8 @@ export const getEvents = onRequest(async (request, response) => {
     // Get the next iteration cursor
     let startAfterId = request.query.startAfter as string;
     // Get the sports league to query
-    const sportKey = request.query.sportKey as string || "americanfootball_nfl";
+    const sportKey =
+      (request.query.sportKey as string) || "americanfootball_nfl";
 
     logger.info(`Limit set to: ${limit}`);
     logger.info(`Start after set to: ${startAfterId}`);
@@ -30,7 +31,7 @@ export const getEvents = onRequest(async (request, response) => {
     // Check if cursor exists
     if (!startAfterId) {
       logger.warn("No startAfterId provided, using default value.");
-      startAfterId = "2025-12-23T00:00:00Z";
+      startAfterId = "2025-12-31T00:00:00Z";
     }
 
     // Check if the limit is within the threshold
@@ -65,9 +66,11 @@ export const getEvents = onRequest(async (request, response) => {
           });
         } else {
           logger.warn("No such documents!");
-          response
-            .status(400)
-            .send("No events found");
+          response.status(200).json({
+            nextPageToken: null,
+            hasMore: false,
+            data: [],
+          });
         }
       })
       .catch((error) => {
