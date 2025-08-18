@@ -45,9 +45,7 @@ export const getEventOdds = onRequest(async (request, response) => {
           logger.warn("No such documents!");
           response
             .status(400)
-            .send(
-              "Bad Request: Odds Format (?format) is possibly invalid.",
-            );
+            .send("Bad Request: Odds Format (?format) is possibly invalid.");
           return;
         }
       })
