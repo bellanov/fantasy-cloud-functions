@@ -1,4 +1,7 @@
 /**
+ * Retrieve Events Data.
+ * Query Firestore for events data.
+ *
  * Import function triggers from their respective submodules:
  *
  * import {onCall} from "firebase-functions/v2/https";

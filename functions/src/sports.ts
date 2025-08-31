@@ -1,4 +1,7 @@
 /**
+ * Retrieve Sports Data.
+ * Query Firestore for sports data.
+ *
  * Import function triggers from their respective submodules:
  *
  * import {onCall} from "firebase-functions/v2/https";
