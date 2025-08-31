@@ -1,7 +1,7 @@
 {
   "name": "functions",
   "scripts": {
-    "format": "npx prettier . --write",
+    "format": "npx prettier . --write; npm run lint -- --fix",
     "lint": "eslint --ext .js,.ts .",
     "lint-fix": "npm run lint -- --fix",
     "build": "tsc",
